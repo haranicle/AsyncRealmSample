@@ -13,6 +13,7 @@
 		5FB819C21B637BC70006B6F6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FB819C11B637BC70006B6F6 /* Images.xcassets */; };
 		5FB819C51B637BC70006B6F6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FB819C31B637BC70006B6F6 /* LaunchScreen.xib */; };
 		5FB819D11B637BC70006B6F6 /* AsyncRealmSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB819D01B637BC70006B6F6 /* AsyncRealmSampleTests.swift */; };
+		5FE0E8661B63858D00DFA887 /* Animal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE0E8651B63858D00DFA887 /* Animal.swift */; };
 		D98AF3EB688B16CC64E31EC4 /* Pods_AsyncRealmSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 639E7AC6999588633BCEDC48 /* Pods_AsyncRealmSample.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -38,6 +39,7 @@
 		5FB819CA1B637BC70006B6F6 /* AsyncRealmSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AsyncRealmSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FB819CF1B637BC70006B6F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5FB819D01B637BC70006B6F6 /* AsyncRealmSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncRealmSampleTests.swift; sourceTree = "<group>"; };
+		5FE0E8651B63858D00DFA887 /* Animal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animal.swift; sourceTree = "<group>"; };
 		639E7AC6999588633BCEDC48 /* Pods_AsyncRealmSample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AsyncRealmSample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7C798D6F92C5E3052EE98CC /* Pods-AsyncRealmSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AsyncRealmSample.release.xcconfig"; path = "Pods/Target Support Files/Pods-AsyncRealmSample/Pods-AsyncRealmSample.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,6 +101,7 @@
 				5FB819C11B637BC70006B6F6 /* Images.xcassets */,
 				5FB819C31B637BC70006B6F6 /* LaunchScreen.xib */,
 				5FB819B81B637BC70006B6F6 /* Supporting Files */,
+				5FE0E8651B63858D00DFA887 /* Animal.swift */,
 			);
 			path = AsyncRealmSample;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 			files = (
 				5FB819BD1B637BC70006B6F6 /* ViewController.swift in Sources */,
 				5FB819BB1B637BC70006B6F6 /* AppDelegate.swift in Sources */,
+				5FE0E8661B63858D00DFA887 /* Animal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
