@@ -10,5 +10,5 @@ import RealmSwift
 
 class Animal: Object {
     dynamic var name = ""
-    dynamic var legCount = 4
+    dynamic var legCount = 0
 }

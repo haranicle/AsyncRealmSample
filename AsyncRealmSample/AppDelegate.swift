@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let turtle = Animal()
+        turtle.name = "Turtle"
+        turtle.legCount = 4
+        
+        let realm = Realm()
+        realm.write {
+            realm.add(turtle)
+        }
+        
+        
         return true
     }
 
