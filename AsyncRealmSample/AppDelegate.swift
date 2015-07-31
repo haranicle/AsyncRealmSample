@@ -17,17 +17,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        let realm = Realm()
+        
+        realm.write {
+            realm.deleteAll()
+        }
         
         let turtle = Animal()
         turtle.name = "Turtle"
         turtle.legCount = 4
         
-        let realm = Realm()
         realm.write {
             realm.add(turtle)
         }
         
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), { () -> Void in
+            let realm = Realm()
+            let crane = Animal()
+            crane.name = "Crane"
+            crane.legCount = 2
+            
+            Realm().write {
+                NSThread.sleepForTimeInterval(1)
+                Realm().add(crane)
+                println("---added")
+                let animals2 = Realm().objects(Animal)
+                for animal in animals2 {
+                    println(animal.name)
+                }
+            }
+        })
         
+        let animals1 = Realm().objects(Animal)
+        
+        for animal in animals1 {
+            println(animal.name)
+        }
+        
+        NSThread.sleepForTimeInterval(2)
+        
+        println("---result")
+        
+        let animals3 = Realm().objects(Animal)
+        for animal in animals3 {
+            println(animal.name)
+        }
+        
+
         return true
     }
 
