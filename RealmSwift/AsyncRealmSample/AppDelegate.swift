@@ -17,18 +17,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        let realm = Realm()
+        Realm().write {
+            Realm().deleteAll()
+        }
         
-        realm.write {
-            realm.deleteAll()
+        let token = Realm().addNotificationBlock { notification, realm in
+            println("---notification")
+            
+            let animals = Realm().objects(Animal)
+            for animal in animals {
+                println(animal.name)
+            }
         }
         
         let turtle = Animal()
         turtle.name = "Turtle"
         turtle.legCount = 4
         
-        realm.write {
-            realm.add(turtle)
+        Realm().write {
+            Realm().add(turtle)
         }
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), { () -> Void in
@@ -37,19 +44,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             crane.name = "Crane"
             crane.legCount = 2
             
+            NSThread.sleepForTimeInterval(1)
+            
             Realm().write {
-                NSThread.sleepForTimeInterval(1)
                 Realm().add(crane)
-                println("---added")
-                let animals2 = Realm().objects(Animal)
-                for animal in animals2 {
-                    println(animal.name)
-                }
+            }
+            
+            println("---added")
+            let animals2 = Realm().objects(Animal)
+            for animal in animals2 {
+                println(animal.name)
             }
         })
         
+        println("---sync")
         let animals1 = Realm().objects(Animal)
-        
         for animal in animals1 {
             println(animal.name)
         }
@@ -63,7 +72,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             println(animal.name)
         }
         
-
         return true
     }
 
