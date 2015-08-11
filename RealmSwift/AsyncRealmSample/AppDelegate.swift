@@ -43,17 +43,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {[weak self] () -> Void in
+
+            NSThread.sleepForTimeInterval(1)
+            
             let crane = Animal()
             crane.name = "Crane"
             crane.legCount = 2
-            
-            NSThread.sleepForTimeInterval(1)
             
             self!.myRealm().write {[weak self] in
                 self!.myRealm().add(crane)
             }
             
-            println("---added")
+            println("---async")
             for animal in self!.myRealm().objects(Animal) {
                 println(animal.name)
             }
@@ -71,6 +72,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         for animal in myRealm().objects(Animal) {
             println(animal.name)
         }
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {[weak self] () -> Void in
+            println("---result async")
+            for animal in self!.myRealm().objects(Animal) {
+                println(animal.name)
+            }
+        })
+        
+        myRealm().removeNotification(token)
         
         return true
     }
