@@ -14,18 +14,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    
+    func myRealm() -> Realm {
+        let path = "\(NSTemporaryDirectory())hoge.realm"
+        return Realm(path: path)
+    }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        Realm().write {
-            Realm().deleteAll()
+        myRealm().write {[weak self] in
+            self!.myRealm().deleteAll()
         }
         
-        let token = Realm().addNotificationBlock { notification, realm in
+        let token = myRealm().addNotificationBlock {[weak self] notification, realm in
             println("---notification")
             
-            let animals = Realm().objects(Animal)
-            for animal in animals {
+            for animal in self!.myRealm().objects(Animal) {
                 println(animal.name)
             }
         }
@@ -34,32 +38,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         turtle.name = "Turtle"
         turtle.legCount = 4
         
-        Realm().write {
-            Realm().add(turtle)
+        myRealm().write {[weak self] in
+            self!.myRealm().add(turtle)
         }
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), { () -> Void in
-            let realm = Realm()
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {[weak self] () -> Void in
             let crane = Animal()
             crane.name = "Crane"
             crane.legCount = 2
             
             NSThread.sleepForTimeInterval(1)
             
-            Realm().write {
-                Realm().add(crane)
+            self!.myRealm().write {[weak self] in
+                self!.myRealm().add(crane)
             }
             
             println("---added")
-            let animals2 = Realm().objects(Animal)
-            for animal in animals2 {
+            for animal in self!.myRealm().objects(Animal) {
                 println(animal.name)
             }
         })
         
         println("---sync")
-        let animals1 = Realm().objects(Animal)
-        for animal in animals1 {
+        for animal in myRealm().objects(Animal) {
             println(animal.name)
         }
         
@@ -67,8 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         println("---result")
         
-        let animals3 = Realm().objects(Animal)
-        for animal in animals3 {
+        for animal in myRealm().objects(Animal) {
             println(animal.name)
         }
         
