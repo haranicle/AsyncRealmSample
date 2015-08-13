@@ -54,11 +54,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self!.myRealm().add(crane)
             }
             
+            self!.myRealm().refresh()
+            
             println("---async")
             for animal in self!.myRealm().objects(Animal) {
                 println(animal.name)
             }
         })
+        
+        myRealm().refresh()
         
         println("---sync")
         for animal in myRealm().objects(Animal) {
@@ -66,6 +70,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         NSThread.sleepForTimeInterval(2)
+        
+        myRealm().refresh()
         
         println("---result")
         
